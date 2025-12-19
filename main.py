@@ -1,16 +1,32 @@
-# This is a sample Python script.
+from tkinter.tix import COLUMN
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import pandas as pd
+import csv
+from datetime import datetime
 
+class CSV:
+    CSV_FILE = "finance_data.csv"
+    COLUMNS = ["date", "amount", "category", "description"]
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    @classmethod
+    def initialize_csv(cls):
+        try:
+            pd.read_csv(cls.CSV_FILE)
+        except FileNotFoundError:
+            df = pd.DataFrame(columns = cls.COLUMNS)
+            df.to_csv(cls.CSV_FILE, index=False)
 
+    @classmethod
+    def add_entry(cls, date, amount, category, description):
+        new_entry = {
+            "date" : date,
+            "amount" : amount,
+            "category" : category,
+            "description" : description
+        }
+        with open(cls.CSV_FILE, "a", newline= "") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=cls.COLUMNS)
+            writer.writerow(new_entry)
+        print("Entry added successfully")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+CSV.initialize_csv()
