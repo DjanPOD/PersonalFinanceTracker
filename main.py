@@ -3,6 +3,7 @@ from tkinter.tix import COLUMN
 import pandas as pd
 import csv
 from datetime import datetime
+from data_entry import get_amount, get_category, get_date, get_description
 
 class CSV:
     CSV_FILE = "finance_data.csv"
@@ -29,4 +30,10 @@ class CSV:
             writer.writerow(new_entry)
         print("Entry added successfully")
 
+def add():
+    CSV.initialize_csv()
+
+
+
 CSV.initialize_csv()
+CSV.add_entry("20-12-2025", 200.59, "Income", "Salary")
