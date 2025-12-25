@@ -3,7 +3,7 @@
 This project is a simple personal finance tracker that helps you record and analyze your income and expenses over time.
 
 Features
-  Add transactions (income or expense) and save them to a CSV file with
+  1. Add transactions (income or expense) and save them to a CSV file with:
 
     Date
 
@@ -13,9 +13,9 @@ Features
 
     Description
 
-  Calculate the total income and total expenses over a user-defined date range.
+  2. Calculate the total income and total expenses over a user-defined date range.
 
-  Generate a plot that shows the total amount per day over time so you can quickly see spending and earning trends.
+  3. Generate a plot that shows the total amount per day over time so you can quickly see spending and earning trends.
 
 How It Works
   1. You enter each transaction with its date, amount, type (income or expense), and a short description.
@@ -33,4 +33,5 @@ How It Works
   4. The program then creates a line plot (or bar chart, depending on your implementation) that displays the total balance or daily totals over the selected days, making it easier to visualize your financial activity.
 
 You can customize the CSV file name, date format, and plotting style to fit your own workflow.
+
 
