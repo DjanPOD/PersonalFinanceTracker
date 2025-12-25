@@ -18,7 +18,7 @@ def get_date(prompt, allow_default=False):
 
 def get_amount():
     try:
-        amount = float(input("Enter the amount:"))
+        amount = float(input("Enter the amount: "))
         if amount <= 0:
             raise ValueError("Amount must be a non-negative and non-zero value.")
         return amount
@@ -36,4 +36,4 @@ def get_category():
     return get_category()
 
 def get_description():
-    return input("Enter a description: (optional) ")
+    return input("Enter a description (optional): ")
