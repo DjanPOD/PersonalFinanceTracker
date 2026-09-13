@@ -1,10 +1,11 @@
 import re
 
-from flask import Blueprint, jsonify, request
-from werkzeug.security import generate_password_hash
+from flask import Blueprint, g, jsonify, request
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.extensions import db
 from app.models.user import User
+from app.utils.auth import create_access_token, token_required
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 
@@ -61,3 +62,39 @@ def register():
     db.session.commit()
 
     return jsonify({"user": user.to_dict()}), 201
+
+@auth_bp.post("/login")
+def login():
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({"error": "A JSON request body is required."}), 400
+
+    email = str(data.get("email", "")).strip().lower()
+    password = data.get("password", "")
+
+    if not email or not isinstance(password, str):
+        return jsonify({"error": "Email and password are required."}), 400
+
+    user = db.session.scalar(
+        db.select(User).where(User.email == email)
+    )
+
+    if user is None or not check_password_hash(user.password_hash, password):
+        return jsonify({"error": "Invalid email or password."}), 401
+
+    access_token = create_access_token(user.id)
+
+    return jsonify(
+        {
+            "access_token": access_token,
+            "token_type": "Bearer",
+            "user": user.to_dict(),
+        }
+    ), 200
+
+
+@auth_bp.get("/me")
+@token_required
+def get_current_user():
+    return jsonify({"user": g.current_user.to_dict()}), 200
