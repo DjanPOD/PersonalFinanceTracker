@@ -22,8 +22,10 @@ def create_app() -> Flask:
     db.init_app(app)
     migrate.init_app(app, db)
 
+    from app.routes.auth import auth_bp
     from app.routes.health import health_bp
 
+    app.register_blueprint(auth_bp)
     app.register_blueprint(health_bp)
 
     return app

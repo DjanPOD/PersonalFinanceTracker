@@ -14,5 +14,13 @@ class User(db.Model):
         default=lambda: datetime.now(timezone.utc)
     )
 
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email,
+            "created_at": self.created_at.isoformat(),
+        }
+    
     def __repr__(self) -> str:
-        return f"User {self.email}"
+        return f"<User {self.email}>"

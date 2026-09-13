@@ -9,3 +9,6 @@ class Config:
         "sqlite:///personal_finance_tracker.db",
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    JWT_ALGORITHM = "HS256"
+    JWT_EXPIRATION_MINUTES = 60
