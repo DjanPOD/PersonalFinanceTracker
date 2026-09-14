@@ -14,6 +14,19 @@ class User(db.Model):
         default=lambda: datetime.now(timezone.utc)
     )
 
+    categories = db.relationship(
+        "Category",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+    transactions = db.relationship(
+        "Transaction",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
+
     def to_dict(self) -> dict:
         return {
             "id": self.id,
