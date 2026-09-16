@@ -1,7 +1,6 @@
 from calendar import monthrange
 from datetime import date
 from decimal import Decimal
-from typing import Any
 
 from flask import Blueprint, g, jsonify, request
 from sqlalchemy import case, func
@@ -21,6 +20,7 @@ dashboard_bp = Blueprint(
 def parse_month(value: str | None) -> tuple[date, date]:
     if not value:
         today = date.today()
+
         return (
             date(today.year, today.month, 1),
             date(
@@ -35,9 +35,13 @@ def parse_month(value: str | None) -> tuple[date, date]:
         year = int(year_text)
         month = int(month_text)
         last_day = monthrange(year, month)[1]
-        return date(year, month, 1), date(year, month, last_day)
-    except (TypeError, ValueError):
-        raise ValueError("Month must use YYYY-MM format.")
+
+        return (
+            date(year, month, 1),
+            date(year, month, last_day),
+        )
+    except (TypeError, ValueError) as error:
+        raise ValueError("Month must use YYYY-MM format.") from error
 
 
 def money_to_string(value: Decimal | None) -> str:
@@ -80,6 +84,7 @@ def get_dashboard_summary():
     )
 
     totals = db.session.execute(totals_statement).one()
+
     total_income = totals.total_income
     total_expenses = totals.total_expenses
     balance = total_income - total_expenses
