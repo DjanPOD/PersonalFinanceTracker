@@ -10,6 +10,16 @@ export type CategoriesResponse = {
   categories: Category[];
 };
 
+export type CreateCategoryPayload = {
+  name: string;
+  type: "income" | "expense";
+  color?: string;
+};
+
+export type CreateCategoryResponse = {
+  category: Category;
+};
+
 export type Transaction = {
   id: number;
   amount: string;
