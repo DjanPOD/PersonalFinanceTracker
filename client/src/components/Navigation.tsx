@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 const navigationItems = [
   { label: "Dashboard", to: "/" },
   { label: "Transactions", to: "/transactions" },
+  { label: "Categories", to: "/categories" },
 ];
 
 export function Navigation() {
