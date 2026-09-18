@@ -22,3 +22,10 @@ server/**/*.pyc
 .DS_Store
 Thumbs.db
 "@ | Set-Content -Encoding utf8 .gitignore
+
+# Python test and coverage output
+.pytest_cache/
+.coverage
+coverage.xml
+test-results.xml
+htmlcov/

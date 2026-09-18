@@ -6,9 +6,9 @@ from app.models import Category, Transaction, User
 from config import Config
 
 
-def create_app() -> Flask:
+def create_app(config_object: type[Config] | None = None) -> Flask:
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_object or Config)
 
     CORS(
         app,
