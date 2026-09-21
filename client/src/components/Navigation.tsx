@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
+import { BudgetsPage } from "../pages/BudgetsPage";
 
 const navigationItems = [
   { label: "Dashboard", to: "/" },
   { label: "Transactions", to: "/transactions" },
   { label: "Categories", to: "/categories" },
+  { label: "Budget", to: "/budgets"}
 ];
 
 export function Navigation() {

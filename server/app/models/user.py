@@ -26,6 +26,12 @@ class User(db.Model):
         cascade="all, delete-orphan",
         passive_deletes=True,
     )
+    budgets = db.relationship(
+        "Budget",
+        back_populates="user",
+        cascade="all, delete-orphan",
+        passive_deletes=True,
+    )
 
     def to_dict(self) -> dict:
         return {
