@@ -774,3 +774,133 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+.budget-form-card {
+  margin-bottom: 1.5rem;
+}
+
+.budget-form {
+  margin-top: 1.25rem;
+}
+
+.budget-form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+}
+
+.budget-form-note {
+  margin: 0.875rem 0 0;
+}
+
+.budget-feedback {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.budget-loading {
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.budget-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.budget-card {
+  border: 1px solid var(--color-border);
+  border-radius: 0.875rem;
+  padding: 1.125rem;
+}
+
+.budget-card-heading,
+.budget-category-name,
+.budget-amounts,
+.budget-card-footer {
+  align-items: center;
+  display: flex;
+}
+
+.budget-card-heading,
+.budget-amounts,
+.budget-card-footer {
+  justify-content: space-between;
+}
+
+.budget-card-heading {
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.budget-category-name {
+  gap: 0.625rem;
+  min-width: 0;
+}
+
+.budget-category-name h3 {
+  font-size: 1rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.budget-amounts,
+.budget-card-footer {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  gap: 0.75rem;
+}
+
+.budget-amounts {
+  margin-bottom: 0.625rem;
+}
+
+.budget-progress-track {
+  background: var(--color-surface-muted);
+  border-radius: 999px;
+  height: 0.625rem;
+  overflow: hidden;
+}
+
+.budget-progress-fill {
+  background: var(--color-income);
+  border-radius: inherit;
+  height: 100%;
+  transition: width 180ms ease;
+}
+
+.budget-progress-warning {
+  background: var(--color-warning, #f59e0b);
+}
+
+.budget-progress-over {
+  background: var(--color-expense);
+}
+
+.budget-card-footer {
+  margin-top: 0.625rem;
+}
+
+.budget-status {
+  color: var(--color-income);
+  font-weight: 600;
+  text-align: right;
+}
+
+.budget-status-over {
+  color: var(--color-expense);
+}
+
+@media (max-width: 720px) {
+  .budget-form-grid,
+  .budget-grid {
+    grid-template-columns: 1fr;
+  }
+}

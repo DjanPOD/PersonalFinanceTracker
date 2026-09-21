@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from app.extensions import db, migrate
-from app.models import Category, Transaction, User
+from app.models import Budget, Category, Transaction, User
 from config import Config
 
 
@@ -27,8 +27,10 @@ def create_app(config_object: type[Config] | None = None) -> Flask:
     from app.routes.dashboard import dashboard_bp
     from app.routes.health import health_bp
     from app.routes.transactions import transactions_bp
+    from app.routes.budgets import budgets_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(budgets_bp)
     app.register_blueprint(categories_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(health_bp)
