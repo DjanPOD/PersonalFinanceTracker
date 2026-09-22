@@ -904,3 +904,72 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+
+.chart-card {
+  margin: 1.5rem 0;
+}
+
+.expense-chart,
+.budget-chart {
+  width: 100%;
+}
+
+.budget-chart-section {
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.chart-empty-state {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 240px;
+  text-align: center;
+}
+
+.chart-tooltip {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgb(15 23 42 / 12%);
+  min-width: 150px;
+  padding: 0.75rem;
+}
+
+.chart-tooltip-title {
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.chart-tooltip-value {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  margin: 0.125rem 0 0;
+}
+
+.recharts-legend-item-text {
+  color: var(--color-text-muted) !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.recharts-cartesian-grid line {
+  stroke: var(--color-border);
+}
+
+@media (max-width: 560px) {
+  .expense-chart .recharts-legend-wrapper {
+    max-height: 88px;
+    overflow-y: auto;
+  }
+
+  .budget-chart .recharts-yAxis .recharts-cartesian-axis-tick-value {
+    font-size: 0.6875rem;
+  }
+}

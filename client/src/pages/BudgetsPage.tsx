@@ -16,6 +16,7 @@ import type {
 } from "../types/budgets";
 import type { CategoriesResponse, Category } from "../types/transactions";
 import { formatCurrency, formatMonth, getCurrentMonth } from "../utils/formatters";
+import { BudgetUtilizationChart } from "../components/charts/BudgetUtilizationChart";
 
 type BudgetFormState = {
   amount: string;
@@ -368,6 +369,10 @@ export function BudgetsPage() {
               Spending progress for {formatMonth(month)}.
             </p>
           </div>
+        </div>
+
+        <div className="budget-chart-section">
+          <BudgetUtilizationChart budgets={budgets} />
         </div>
 
         {successMessage ? (
