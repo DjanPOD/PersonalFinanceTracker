@@ -13,6 +13,7 @@ import {
   formatMonth,
   getCurrentMonth,
 } from "../utils/formatters";
+import { ExpenseBreakdownChart } from "../components/charts/ExpenseBreakdownChart";
 
 type SummaryCardProps = {
   label: string;
@@ -186,6 +187,19 @@ export function DashboardPage() {
               value={formatCurrency(dashboardData.summary.balance)}
             />
           </div>
+          
+          <section className="content-card chart-card">
+            <div className="section-heading">
+              <div>
+                <h2>Expense breakdown</h2>
+                <p className="muted-text">
+                  Where your spending went in {formatMonth(dashboardData.period.month)}.
+                </p>
+              </div>
+            </div>
+
+            <ExpenseBreakdownChart expenses={expenses} />
+          </section>
 
           <div className="dashboard-grid">
             <section className="content-card">
