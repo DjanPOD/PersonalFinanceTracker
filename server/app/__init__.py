@@ -14,7 +14,10 @@ def create_app(config_object: type[Config] | None = None) -> Flask:
         app,
         resources={
             r"/api/*": {
-                "origins": "http://localhost:5173",
+                "origins": [
+                    "http://localhost:5173",
+                    "http://localhost:8080",
+                ],
             }
         },
     )
