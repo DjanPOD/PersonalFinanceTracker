@@ -1,31 +1,33 @@
-@"
 # Frontend dependencies and build output
 client/node_modules/
 client/dist/
 
-# Python virtual environments and caches
+# Python virtual environments, caches, and test output
 server/.venv/
 server/__pycache__/
 server/**/*.pyc
 .pytest_cache/
+.coverage
+coverage.xml
+test-results.xml
+htmlcov/
 
 # Environment files and local databases
 .env
 .env.*
 !.env.example
+client/.env
+client/.env.local
+client/.env.*.local
+server/*.db
+server/*.sqlite
+server/*.sqlite3
 *.db
 *.sqlite
 *.sqlite3
 
 # Editor and operating-system files
 .vscode/
+.idea/
 .DS_Store
 Thumbs.db
-"@ | Set-Content -Encoding utf8 .gitignore
-
-# Python test and coverage output
-.pytest_cache/
-.coverage
-coverage.xml
-test-results.xml
-htmlcov/

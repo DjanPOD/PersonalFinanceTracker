@@ -35,3 +35,47 @@ How It Works
 You can customize the CSV file name, date format, and plotting style to fit your own workflow.
 
 
+## Run with Docker
+
+### Prerequisites
+
+- Docker Desktop
+- Docker Compose v2
+
+### Start the application
+
+1. Create your local Docker environment file:
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+2. Set a strong `SECRET_KEY` value in `.env`.
+
+3. Build and start the application:
+
+   ```powershell
+   docker compose up --build
+   ```
+
+4. Open the app:
+
+   ```text
+   http://localhost:8080
+   ```
+
+The frontend is served by Nginx. Requests under `/api/` are proxied internally to the Flask backend.
+
+### Stop the application
+
+```powershell
+docker compose down
+```
+
+This preserves the SQLite database in the `ledgerly_data` Docker volume.
+
+To stop the stack and permanently remove all Docker data, including the database:
+
+```powershell
+docker compose down -v
+```
