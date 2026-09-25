@@ -31,3 +31,6 @@ server/*.sqlite3
 .idea/
 .DS_Store
 Thumbs.db
+
+# Frontend test coverage reports
+client/coverage/
