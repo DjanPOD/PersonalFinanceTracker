@@ -1,81 +1,221 @@
-﻿# PersonalFinanceTracker
+# Ledgerly
 
-This project is a simple personal finance tracker that helps you record and analyze your income and expenses over time.
+A full-stack personal finance tracker for managing income, expenses, categories, monthly budgets, and spending insights.
 
-Features
-  1. Add transactions (income or expense) and save them to a CSV file with:
+Ledgerly provides a React and TypeScript frontend backed by a Flask REST API. Users can register and sign in securely, record and filter transactions, organize transactions with categories, set monthly budgets, and review dashboard summaries and spending charts.
 
-    Date
+## Features
 
-    Amount
+- JWT-based user registration, login, and protected application routes
+- User-specific transactions with income and expense types
+- Transaction filtering by type, category, and date range
+- Transaction creation, validation, and deletion with confirmation
+- Income and expense category management
+- Monthly budgets by expense category
+- Budget utilization, remaining balance, and over-budget indicators
+- Dashboard summary of income, expenses, balance, category totals, and recent transactions
+- Expense-breakdown and budget-utilization charts
+- Responsive application navigation for authenticated and guest users
+- Dockerized local development environment
+- Automated frontend and backend test execution through GitHub Actions on pushes and pull requests
 
-    Category (Income or Expense)
+## Tech Stack
 
-    Description
+### Frontend
 
-  2. Calculate the total income and total expenses over a user-defined date range.
+- React
+- TypeScript
+- Vite
+- React Router
+- Recharts
+- Vitest
+- React Testing Library
 
-  3. Generate a plot that shows the total amount per day over time so you can quickly see spending and earning trends.
+### Backend
 
-How It Works
-  1. You enter each transaction with its date, amount, type (income or expense), and a short description.
+- Python
+- Flask
+- SQLAlchemy
+- REST API design
+- JWT authentication
 
-  2. The program writes these records to a CSV file, which acts as your finance log.
+### DevOps and Tooling
 
-  3. Given a start and end date, the tracker:
+- Docker
+- Docker Compose
+- GitHub Actions CI
+- Git and GitHub
 
-    Reads the CSV.
+## Application Areas
 
-    Filters transactions within that date range.
+| Area | Capabilities |
+|---|---|
+| Authentication | Register, log in, restore sessions, log out, and protect authenticated routes |
+| Dashboard | Monthly income, expenses, balance, recent transactions, and expense-category summaries |
+| Transactions | Create, filter, review, validate, and delete income and expense transactions |
+| Categories | Create and organize income and expense categories |
+| Budgets | Set monthly category budgets and view spent, remaining, and utilization values |
+| Charts | View expense breakdown and budget utilization visualizations |
 
-    Sums income and expense separately to show your totals.
+## Project Structure
 
-  4. The program then creates a line plot (or bar chart, depending on your implementation) that displays the total balance or daily totals over the selected days, making it easier to visualize your financial activity.
+```text
+personal-finance-tracker/
+├── client/                         # React + TypeScript frontend
+│   ├── src/
+│   │   ├── api/                    # API client and request/error handling
+│   │   ├── components/             # Shared UI and route-protection components
+│   │   ├── context/                # Authentication state
+│   │   ├── layouts/                # Shared application layout
+│   │   ├── pages/                  # Dashboard, transactions, budgets, auth, and other pages
+│   │   ├── types/                  # TypeScript domain types
+│   │   └── utils/                  # Formatting helpers
+│   └── package.json
+├── server/                         # Flask backend
+│   ├── app/                        # Application factory, models, routes, and services
+│   ├── tests/                      # Backend tests
+│   └── requirements.txt
+├── docker-compose.yml
+└── README.md
+```
 
-You can customize the CSV file name, date format, and plotting style to fit your own workflow.
-
-
-## Run with Docker
+## Getting Started
 
 ### Prerequisites
 
-- Docker Desktop
-- Docker Compose v2
+Install the following tools:
 
-### Start the application
+- Node.js and npm
+- Python 3
+- Docker Desktop and Docker Compose, if using containers
 
-1. Create your local Docker environment file:
+### Run with Docker
 
-   ```powershell
-   Copy-Item .env.example .env
-   ```
+From the project root:
 
-2. Set a strong `SECRET_KEY` value in `.env`.
+```bash
+docker compose up --build
+```
 
-3. Build and start the application:
+Use the application URLs and environment variables configured in `docker-compose.yml`.
 
-   ```powershell
-   docker compose up --build
-   ```
+To stop the containers:
 
-4. Open the app:
-
-   ```text
-   http://localhost:8080
-   ```
-
-The frontend is served by Nginx. Requests under `/api/` are proxied internally to the Flask backend.
-
-### Stop the application
-
-```powershell
+```bash
 docker compose down
 ```
 
-This preserves the SQLite database in the `ledgerly_data` Docker volume.
+### Run Locally
 
-To stop the stack and permanently remove all Docker data, including the database:
+#### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+#### Frontend tests
+
+```bash
+cd client
+npm run test:run
+npm run test:coverage
+npm run build
+```
+
+#### Backend
+
+Create and activate a Python virtual environment, install the server dependencies, configure environment variables, apply any required database migrations, and start the Flask application according to the backend setup files in `server/`.
+
+A typical local setup is:
+
+```bash
+cd server
+python -m venv .venv
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Windows PowerShell:
 
 ```powershell
-docker compose down -v
+.\.venv\Scripts\Activate.ps1
 ```
+
+Then install dependencies and run the server using the commands defined by the backend project configuration:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Testing
+
+The project includes automated frontend and backend tests.
+
+### Frontend coverage
+
+The frontend test suite covers:
+
+- API request and error handling
+- Authentication context and protected routes
+- Login and registration behavior
+- Dashboard loading, empty, retry, and expired-session states
+- Category creation and validation errors
+- Budget creation, utilization states, and empty states
+- Transaction creation, filtering, validation, retry, and deletion flows
+- Navigation, layout, application routing, and 404 behavior
+- Chart empty states and chart color/fallback logic
+
+Run frontend tests:
+
+```bash
+cd client
+npm run test:run
+```
+
+Generate frontend coverage:
+
+```bash
+cd client
+npm run test:coverage
+```
+
+Generated coverage reports are intentionally excluded from version control.
+
+### Continuous Integration
+
+GitHub Actions runs the frontend and backend test suites automatically for:
+
+- Pushes to the repository
+- Pull requests
+
+This provides an automated quality gate before changes are merged.
+
+## Security and Data Handling
+
+- Authentication uses JWT tokens.
+- Authenticated API endpoints require a valid access token.
+- Protected frontend routes redirect unauthenticated users to sign in.
+- Financial records are scoped to the authenticated user.
+- The frontend handles expired-session responses by logging the user out.
+
+## Future Improvements
+
+Potential next enhancements include:
+
+- Transaction editing
+- Budget editing and deletion
+- Recurring transactions
+- CSV transaction import/export
+- Password reset and email verification
+- Deployment to a cloud hosting platform
+- Backend integration-test and coverage-threshold expansion
+
+## License
+
+Add a license for later for preferred usage model, such as MIT.
